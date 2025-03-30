@@ -37,7 +37,7 @@ function AuthUser({ user }: { user: User }) {
 				<DropdownMenuLabel>My Account</DropdownMenuLabel>
 				<DropdownMenuSeparator />
 				<DropdownMenuGroup>
-					<Link href="/dashboard">
+					<Link href="/dashboard" prefetch>
 						<DropdownMenuItem>
 							Dashboard
 							<DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
