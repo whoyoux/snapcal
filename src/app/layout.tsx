@@ -16,7 +16,7 @@ const geistSans = Geist({
 
 export const metadata: Metadata = {
 	title: "SnapCal",
-	description: "SnapCal - find calories ",
+	description: "SnapCal - Count your calories just by making an photo!",
 };
 
 export default function RootLayout({
