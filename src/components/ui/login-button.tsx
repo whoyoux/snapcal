@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 function LoginButton({ isPending }: { isPending: boolean }) {
 	const login = async () => {
-		const { data, error } = await signIn.social({
+		const { error } = await signIn.social({
 			provider: "discord",
 			callbackURL: "/",
 		});

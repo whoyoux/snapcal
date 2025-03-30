@@ -20,8 +20,8 @@ export default function Home() {
 				</h2>
 				<p className="text-lg text-muted-foreground max-w-2xl mx-auto">
 					SnapCal is an innovative app that lets you track your calories in a
-					simple and fast way. Just take a picture of your meal and we'll do the
-					rest!
+					simple and fast way. Just take a picture of your meal and we&apos;ll
+					do the rest!
 				</p>
 			</div>
 		</div>
