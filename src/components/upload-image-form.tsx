@@ -37,7 +37,8 @@ function UploadImageForm() {
 		startTransition(async () => {
 			toast.promise(calculateCalories(fd), {
 				loading: "Loading ...",
-				success: () => {
+				success: (result) => {
+					console.log(result?.data?.text)
 					return "Success!";
 				},
 				error: "An error has occured. Please try again later.",
@@ -57,6 +58,7 @@ function UploadImageForm() {
 							<FormControl>
 								<Input
 									type="file"
+									accept="image/jpeg,image/png,image/webp"
 									onChange={(e) => {
 										const file = e.target.files?.[0];
 										field.onChange(file);
