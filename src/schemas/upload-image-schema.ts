@@ -1,7 +1,7 @@
 import { zfd } from "zod-form-data";
 import { z } from "zod";
 
-import { ACCEPT_UPLOAD_IMAGE_TYPES, MAX_UPLOAD_IMAGE_SIZE } from "@/app/config";
+import { ACCEPT_UPLOAD_IMAGE_TYPES, MAX_UPLOAD_IMAGE_SIZE } from "@/config";
 
 export const UploadImageFormSchema = zfd.formData({
 	image: zfd.file(

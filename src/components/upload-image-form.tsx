@@ -65,13 +65,15 @@ function UploadImageForm() {
 									}}
 								/>
 							</FormControl>
-							<FormDescription>Upload an image file</FormDescription>
+							<FormDescription>
+								Supported formats: PNG, JPG up to 10MB
+							</FormDescription>
 							<FormMessage />
 						</FormItem>
 					)}
 				/>
 				<Button type="submit" disabled={isPending}>
-					Submit
+					Calculate
 				</Button>
 			</form>
 		</Form>

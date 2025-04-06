@@ -20,7 +20,7 @@ function UploadImageCard() {
 				<UploadImageForm />
 			</CardContent>
 			<CardFooter className="text-sm text-muted-foreground">
-				<p>Supported formats: PNG, JPG up to 5MB</p>
+				<p>Supported formats: PNG, JPG up to 10MB</p>
 			</CardFooter>
 		</Card>
 	);
