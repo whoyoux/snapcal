@@ -38,8 +38,19 @@ function UploadImageForm() {
 			toast.promise(calculateCalories(fd), {
 				loading: "Loading ...",
 				success: (result) => {
-					console.log(result?.data?.message);
-					return "Success!";
+					if (!result?.data?.success) {
+						return {
+							type: "error",
+							message:
+								result?.data?.message ||
+								"An error has occured. Please try again later.",
+						};
+					}
+
+					return {
+						type: "success",
+						message: "Success!",
+					};
 				},
 				error: "An error has occured. Please try again later.",
 			});

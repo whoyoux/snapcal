@@ -1,14 +1,66 @@
 import "server-only";
 
-import { generateText } from "ai";
+import { generateObject } from "ai";
 import { openai } from "@ai-sdk/openai";
 
-export const calculateFromImageAi = async (file?: File) => {
-	const { text } = await generateText({
-		model: openai("o3-mini"),
-		prompt:
-			"Can you extract a ingridients from a meal photo that i'm gonna provide to you and them calculate calories, carbs, fat etc?",
-	});
+import { z } from "zod";
 
-	return { text };
+const nutritionSchema = z.object({
+	calories: z.number(),
+	carbs: z.number(),
+	protein: z.number(),
+	fat: z.number(),
+	ingredients: z.array(z.string()),
+});
+
+type NutritionInfo = z.infer<typeof nutritionSchema>;
+type calculateFromImageAiResponse =
+	| {
+			success: true;
+			data: NutritionInfo;
+	  }
+	| {
+			success: false;
+			message: string;
+	  };
+
+export const calculateFromImageAi = async (
+	imageUrl: string,
+): Promise<calculateFromImageAiResponse> => {
+	try {
+		const data = await generateObject({
+			model: openai("gpt-4o-mini"),
+			schema: nutritionSchema,
+			messages: [
+				{
+					role: "system",
+					content:
+						"Jesteś ekspertem od analizy wartości odżywczych. Analizuj zdjęcia posiłków i podawaj dokładne informacje o kaloriach, węglowodanach, białku, tłuszczach oraz składnikach.",
+				},
+				{
+					role: "user",
+					content: [
+						{
+							type: "text",
+							text: "Przeanalizuj to zdjęcie posiłku i podaj wartości odżywcze.",
+						},
+						{
+							type: "image",
+							image: imageUrl,
+						},
+					],
+				},
+			],
+		});
+
+		return {
+			success: true,
+			data: data.object,
+		};
+	} catch (err) {
+		return {
+			success: false,
+			message: (err as Error).message,
+		};
+	}
 };

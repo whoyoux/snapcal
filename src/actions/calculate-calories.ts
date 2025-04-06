@@ -20,6 +20,19 @@ export const calculateCalories = authActionClient
 			};
 		}
 
-		console.log(`Image public URL: ${uploadResponse.publicFileUrl}`);
-		//setTimeout(() => {}, 3000);
+		const aiResponse = await calculateFromImageAi(uploadResponse.publicFileUrl);
+
+		if (!aiResponse.success) {
+			return {
+				success: false,
+				message: "An error has occured. Please try again later!",
+			};
+		}
+
+		const nutritions = aiResponse.data;
+		console.log(nutritions);
+
+		return {
+			success: true,
+		};
 	});

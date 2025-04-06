@@ -5,7 +5,7 @@ import Image from "next/image";
 import { redirect } from "next/navigation";
 
 import placeholderImage from "@/assets/placeholder.webp";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 
 async function Dashboard() {
