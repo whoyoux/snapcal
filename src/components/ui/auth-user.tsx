@@ -15,6 +15,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { signOut } from "@/lib/auth-client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 function AuthUser({ user }: { user: User }) {
 	const router = useRouter();
@@ -22,6 +23,10 @@ function AuthUser({ user }: { user: User }) {
 		await signOut();
 		router.push("/");
 	};
+
+	useEffect(() => {
+		router.prefetch('/dashboard')
+	}, [router])
 
 	return (
 		<DropdownMenu>
@@ -37,7 +42,7 @@ function AuthUser({ user }: { user: User }) {
 				<DropdownMenuLabel>My Account</DropdownMenuLabel>
 				<DropdownMenuSeparator />
 				<DropdownMenuGroup>
-					<Link href="/dashboard" prefetch>
+					<Link href="/dashboard">
 						<DropdownMenuItem>
 							Dashboard
 							<DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>

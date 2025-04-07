@@ -3,7 +3,7 @@ import { signIn } from "@/lib/auth-client";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 
-function LoginButton({ isPending }: { isPending: boolean }) {
+function LoginButton({ isPending = false }: { isPending?: boolean }) {
 	const login = async () => {
 		const { error } = await signIn.social({
 			provider: "discord",
