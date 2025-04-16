@@ -30,7 +30,7 @@ async function Dashboard() {
 				<UploadImageDialog />
 			</div>
 			<div className="flex flex-col gap-4">
-				{userMeals.length === 0 && (
+				{/* {userMeals.length === 0 && (
 					<div className="p-5 border rounded-lg w-full flex items-center justify-between gap-4">
 						<div className="flex items-center gap-4">
 							<Image
@@ -44,7 +44,6 @@ async function Dashboard() {
 						</div>
 						<div className="flex items-center gap-4">
 							<span className="hidden md:block">560 calories</span>
-							{/* <Button size="sm">See</Button> */}
 							<Link
 								href="/meal/1"
 								className={buttonVariants({ variant: "default", size: "sm" })}
@@ -54,7 +53,7 @@ async function Dashboard() {
 							</Link>
 						</div>
 					</div>
-				)}
+				)} */}
 
 				{userMeals.map((meal) => (
 					<div
@@ -62,14 +61,25 @@ async function Dashboard() {
 						key={meal.id}
 					>
 						<div className="flex items-center gap-4">
-							<Image
+							{/* <Image
 								src={meal.imageSrc}
 								alt={meal.mealName}
 								width={50}
 								height={50}
-								className="rounded-md object-cover bg-muted"
-							/>
-							<h3 className="truncate">{meal.mealName}</h3>
+								className="rounded-md object-cover bg-muted h-auto"
+							/> */}
+							<div className="size-14 relative">
+								<Image
+									src={meal.imageSrc}
+									alt={meal.mealName}
+									fill
+									className="rounded-md object-cover"
+									quality={50}
+								/>
+							</div>
+							<h3 className="max-w-[150px] sm:max-w-[250px] md:max-w-[300px] lg:max-w-none truncate">
+								{meal.mealName}
+							</h3>
 						</div>
 						<div className="flex items-center gap-4">
 							<span className="hidden md:block">{meal.calories} calories</span>
