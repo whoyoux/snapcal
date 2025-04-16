@@ -65,7 +65,7 @@ async function Dashboard() {
 								alt={meal.mealName}
 								width={50}
 								height={50}
-								className="rounded-md object-cover"
+								className="rounded-md object-cover bg-muted"
 							/>
 							<h3 className="truncate">{meal.mealName}</h3>
 						</div>

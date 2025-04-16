@@ -27,14 +27,14 @@ async function MealPage(props: { params: Promise<{ id: string }> }) {
 					"self-start",
 				)}
 			>
-				<ArrowLeft /> Wróć
+				<ArrowLeft /> Go back
 			</Link>
 
 			<div className="flex flex-col gap-8">
 				<div>
 					<h1 className="text-3xl font-bold">{meal.mealName}</h1>
 					<p className="text-xl text-muted-foreground mt-2">
-						{meal.calories} kalorii
+						{meal.calories} calories
 					</p>
 				</div>
 
@@ -52,20 +52,20 @@ async function MealPage(props: { params: Promise<{ id: string }> }) {
 				<div className="grid grid-cols-3 gap-4">
 					<div className="flex flex-col items-center p-4 bg-muted/50 rounded-lg">
 						<span className="text-2xl font-bold">{meal.carbs}g</span>
-						<span className="text-sm text-muted-foreground">Węglowodany</span>
+						<span className="text-sm text-muted-foreground">Carbs</span>
 					</div>
 					<div className="flex flex-col items-center p-4 bg-muted/50 rounded-lg">
 						<span className="text-2xl font-bold">{meal.protein}g</span>
-						<span className="text-sm text-muted-foreground">Białko</span>
+						<span className="text-sm text-muted-foreground">Protein</span>
 					</div>
 					<div className="flex flex-col items-center p-4 bg-muted/50 rounded-lg">
 						<span className="text-2xl font-bold">{meal.fat}g</span>
-						<span className="text-sm text-muted-foreground">Tłuszcze</span>
+						<span className="text-sm text-muted-foreground">Fat</span>
 					</div>
 				</div>
 
 				<div>
-					<h3 className="text-xl font-medium mb-4">Składniki:</h3>
+					<h3 className="text-xl font-medium mb-4">Ingredients:</h3>
 					<ul className="space-y-2">
 						{meal.ingredients.map((ingredient, index) => (
 							// biome-ignore lint/suspicious/noArrayIndexKey: Lista składników jest statyczna
