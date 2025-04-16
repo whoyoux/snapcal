@@ -1,7 +1,7 @@
 import "server-only";
 
-import { UTApi, UTFile } from "uploadthing/server";
-const utapi = new UTApi();
+import { UTApi } from "uploadthing/server";
+const utapi = new UTApi({ logLevel: "Fatal" });
 
 type UploadFileResponse =
 	| {

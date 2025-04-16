@@ -8,6 +8,14 @@ const nextConfig: NextConfig = {
 			bodySizeLimit: "10mb",
 		},
 	},
+	images: {
+		remotePatterns: [
+			{
+				hostname: "k4baa866nr.ufs.sh",
+				protocol: "https",
+			},
+		],
+	},
 };
 
 export default nextConfig;

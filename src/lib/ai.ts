@@ -6,6 +6,7 @@ import { openai } from "@ai-sdk/openai";
 import { z } from "zod";
 
 const nutritionSchema = z.object({
+	mealName: z.string(),
 	calories: z.number(),
 	carbs: z.number(),
 	protein: z.number(),
@@ -35,14 +36,14 @@ export const calculateFromImageAi = async (
 				{
 					role: "system",
 					content:
-						"Jesteś ekspertem od analizy wartości odżywczych. Analizuj zdjęcia posiłków i podawaj dokładne informacje o kaloriach, węglowodanach, białku, tłuszczach oraz składnikach.",
+						"You are a nutrition analysis expert. Analyze meal photos and provide an accurate estimate of the nutritional values based on typical food data. Include total calories, carbohydrates, protein, fat, and a list of ingredients. Make your estimates based on the visible components, portion sizes, and common nutritional databases. If the image is unclear, mention the level of uncertainty.",
 				},
 				{
 					role: "user",
 					content: [
 						{
 							type: "text",
-							text: "Przeanalizuj to zdjęcie posiłku i podaj wartości odżywcze.",
+							text: "Analyze this meal photo and provide its nutritional values.",
 						},
 						{
 							type: "image",
@@ -58,6 +59,7 @@ export const calculateFromImageAi = async (
 			data: data.object,
 		};
 	} catch (err) {
+		console.log(`[AI ERROR]: ${err}`);
 		return {
 			success: false,
 			message: (err as Error).message,

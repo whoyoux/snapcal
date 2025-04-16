@@ -1,6 +1,7 @@
 "use server";
 
 import { calculateFromImageAi } from "@/lib/ai";
+import { prisma } from "@/lib/prisma";
 import { authActionClient } from "@/lib/safe-action";
 import { compressFile } from "@/lib/sharp";
 import { uploadFile } from "@/lib/utapi";
@@ -31,6 +32,26 @@ export const calculateCalories = authActionClient
 
 		const nutritions = aiResponse.data;
 		console.log(nutritions);
+
+		const dbResponse = await prisma.meal.create({
+			data: {
+				...nutritions,
+				imageSrc: uploadResponse.publicFileUrl,
+				user: {
+					connect: {
+						id: session.user.id,
+					},
+				},
+			},
+		});
+
+		if (!dbResponse) {
+			console.log("[DB ERROR] Can not create a meal record!");
+			return {
+				success: false,
+				message: "An error has occured. Please try again later!",
+			};
+		}
 
 		return {
 			success: true,
