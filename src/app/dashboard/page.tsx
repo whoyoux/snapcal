@@ -46,6 +46,7 @@ async function Dashboard() {
 							<Link
 								href="/meal/1"
 								className={buttonVariants({ variant: "default", size: "sm" })}
+								prefetch
 							>
 								See
 							</Link>
