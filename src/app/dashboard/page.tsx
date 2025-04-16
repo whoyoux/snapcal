@@ -9,6 +9,8 @@ import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 
+export const maxDuration = 60;
+
 async function Dashboard() {
 	const session = await getSession();
 	if (!session) {
