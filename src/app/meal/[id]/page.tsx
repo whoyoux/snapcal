@@ -46,6 +46,7 @@ async function MealPage(props: { params: Promise<{ id: string }> }) {
 						sizes="(max-width: 768px) 100vw, 768px"
 						className="object-cover bg-muted rounded-lg"
 						priority
+						quality={100}
 					/>
 				</div>
 
