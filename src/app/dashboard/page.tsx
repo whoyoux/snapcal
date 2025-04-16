@@ -74,6 +74,7 @@ async function Dashboard() {
 							<Link
 								href={`/meal/${meal.id}`}
 								className={buttonVariants({ variant: "default", size: "sm" })}
+								prefetch
 							>
 								See
 							</Link>
