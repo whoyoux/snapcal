@@ -6,6 +6,8 @@ import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 
+import { unstable_ViewTransition as ViewTransition } from "react";
+
 async function MealPage(props: { params: Promise<{ id: string }> }) {
 	const params = await props.params;
 	const meal = await prisma.meal.findUnique({
@@ -32,22 +34,26 @@ async function MealPage(props: { params: Promise<{ id: string }> }) {
 
 			<div className="flex flex-col gap-8">
 				<div>
-					<h1 className="text-3xl font-bold">{meal.mealName}</h1>
+					<ViewTransition name={`meal-name-${meal.id}`}>
+						<h1 className="text-3xl font-bold">{meal.mealName}</h1>
+					</ViewTransition>
 					<p className="text-xl text-muted-foreground mt-2">
 						{meal.calories} calories
 					</p>
 				</div>
 
 				<div className="aspect-video relative rounded-lg overflow-hidden">
-					<Image
-						src={meal.imageSrc}
-						alt={meal.mealName}
-						fill
-						sizes="(max-width: 768px) 100vw, 768px"
-						className="object-cover bg-muted rounded-lg"
-						priority
-						quality={100}
-					/>
+					<ViewTransition name={`meal-img-${meal.id}`}>
+						<Image
+							src={meal.imageSrc}
+							alt={meal.mealName}
+							fill
+							sizes="(max-width: 768px) 100vw, 768px"
+							className="object-cover bg-muted rounded-lg border"
+							priority
+							quality={100}
+						/>
+					</ViewTransition>
 				</div>
 
 				<div className="grid grid-cols-3 gap-4">

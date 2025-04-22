@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
 	experimental: {
 		ppr: true,
 		dynamicIO: true,
+		viewTransition: true,
 		serverActions: {
 			bodySizeLimit: "10mb",
 		},

@@ -9,6 +9,8 @@ import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 
+import { unstable_ViewTransition as ViewTransition } from "react";
+
 export const maxDuration = 60;
 
 async function Dashboard() {
@@ -68,18 +70,24 @@ async function Dashboard() {
 								height={50}
 								className="rounded-md object-cover bg-muted h-auto"
 							/> */}
+
 							<div className="size-14 relative">
-								<Image
-									src={meal.imageSrc}
-									alt={meal.mealName}
-									fill
-									className="rounded-md object-cover"
-									quality={50}
-								/>
+								<ViewTransition name={`meal-img-${meal.id}`}>
+									<Image
+										src={meal.imageSrc}
+										alt={meal.mealName}
+										fill
+										className="rounded-md object-cover"
+										quality={50}
+									/>
+								</ViewTransition>
 							</div>
-							<h3 className="max-w-[150px] sm:max-w-[250px] md:max-w-[300px] lg:max-w-none truncate">
-								{meal.mealName}
-							</h3>
+
+							<ViewTransition name={`meal-name-${meal.id}`}>
+								<h3 className="max-w-[150px] sm:max-w-[250px] md:max-w-[300px] lg:max-w-none truncate">
+									{meal.mealName}
+								</h3>
+							</ViewTransition>
 						</div>
 						<div className="flex items-center gap-4">
 							<span className="hidden md:block">{meal.calories} calories</span>
