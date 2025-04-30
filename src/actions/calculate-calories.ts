@@ -55,5 +55,6 @@ export const calculateCalories = authActionClient
 
 		return {
 			success: true,
+			mealId: dbResponse.id,
 		};
 	});

@@ -19,9 +19,11 @@ import { UploadImageFormSchema } from "@/schemas/upload-image-schema";
 import { toast } from "sonner";
 import { useTransition } from "react";
 import { calculateCalories } from "@/actions/calculate-calories";
+import { useRouter } from "next/navigation";
 
 function UploadImageForm() {
 	const [isPending, startTransition] = useTransition();
+	const router = useRouter();
 
 	const form = useForm<z.infer<typeof UploadImageFormSchema>>({
 		resolver: zodResolver(UploadImageFormSchema),
@@ -46,6 +48,8 @@ function UploadImageForm() {
 								"An error has occured. Please try again later.",
 						};
 					}
+
+					router.push(`/meal/${result.data.mealId}`);
 
 					return {
 						type: "success",

@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 
 import { unstable_ViewTransition as ViewTransition } from "react";
+import DeleteMealButton from "@/components/delete-meal-button";
 
 async function MealPage(props: { params: Promise<{ id: string }> }) {
 	const params = await props.params;
@@ -22,15 +23,19 @@ async function MealPage(props: { params: Promise<{ id: string }> }) {
 
 	return (
 		<div className="flex flex-col gap-8">
-			<Link
-				href="/dashboard"
-				className={cn(
-					buttonVariants({ variant: "default", size: "sm" }),
-					"self-start",
-				)}
-			>
-				<ArrowLeft /> Go back
-			</Link>
+			<div className="flex items-center justify-between">
+				<Link
+					href="/dashboard"
+					className={cn(
+						buttonVariants({ variant: "default", size: "sm" }),
+						"self-start",
+					)}
+				>
+					<ArrowLeft /> Go back
+				</Link>
+
+				<DeleteMealButton mealId={meal.id} />
+			</div>
 
 			<div className="flex flex-col gap-8">
 				<div>
@@ -43,17 +48,15 @@ async function MealPage(props: { params: Promise<{ id: string }> }) {
 				</div>
 
 				<div className="aspect-video relative rounded-lg overflow-hidden">
-					<ViewTransition name={`meal-img-${meal.id}`}>
-						<Image
-							src={meal.imageSrc}
-							alt={meal.mealName}
-							fill
-							sizes="(max-width: 768px) 100vw, 768px"
-							className="object-cover bg-muted rounded-lg border"
-							priority
-							quality={100}
-						/>
-					</ViewTransition>
+					<Image
+						src={meal.imageSrc}
+						alt={meal.mealName}
+						fill
+						sizes="(max-width: 768px) 100vw, 768px"
+						className="object-cover bg-muted rounded-lg border"
+						priority
+						quality={80}
+					/>
 				</div>
 
 				<div className="grid grid-cols-3 gap-4">
@@ -71,7 +74,7 @@ async function MealPage(props: { params: Promise<{ id: string }> }) {
 					</div>
 				</div>
 
-				<div>
+				{/* <div>
 					<h3 className="text-xl font-medium mb-4">Ingredients:</h3>
 					<ul className="space-y-2">
 						{meal.ingredients.map((ingredient, index) => (
@@ -81,7 +84,7 @@ async function MealPage(props: { params: Promise<{ id: string }> }) {
 							</li>
 						))}
 					</ul>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);

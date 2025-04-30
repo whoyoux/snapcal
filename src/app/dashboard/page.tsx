@@ -4,7 +4,6 @@ import getSession from "@/lib/auth-server";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
-import placeholderImage from "@/assets/placeholder.webp";
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
@@ -22,6 +21,9 @@ async function Dashboard() {
 	const userMeals = await prisma.meal.findMany({
 		where: {
 			userId: session.user.id,
+		},
+		orderBy: {
+			createdAt: "desc",
 		},
 	});
 
@@ -72,22 +74,18 @@ async function Dashboard() {
 							/> */}
 
 							<div className="size-14 relative">
-								<ViewTransition name={`meal-img-${meal.id}`}>
-									<Image
-										src={meal.imageSrc}
-										alt={meal.mealName}
-										fill
-										className="rounded-md object-cover"
-										quality={50}
-									/>
-								</ViewTransition>
+								<Image
+									src={meal.imageSrc}
+									alt={meal.mealName}
+									fill
+									className="rounded-md object-cover bg-muted"
+									quality={40}
+								/>
 							</div>
 
-							<ViewTransition name={`meal-name-${meal.id}`}>
-								<h3 className="max-w-[150px] sm:max-w-[250px] md:max-w-[300px] lg:max-w-none truncate">
-									{meal.mealName}
-								</h3>
-							</ViewTransition>
+							<h3 className="max-w-[150px] sm:max-w-[250px] md:max-w-[300px] lg:max-w-none truncate">
+								{meal.mealName}
+							</h3>
 						</div>
 						<div className="flex items-center gap-4">
 							<span className="hidden md:block">{meal.calories} calories</span>
@@ -98,6 +96,8 @@ async function Dashboard() {
 							>
 								See
 							</Link>
+
+							{/* <TransitionButton mealId={meal.id} /> */}
 						</div>
 					</div>
 				))}
