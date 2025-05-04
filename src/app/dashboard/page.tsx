@@ -6,9 +6,8 @@ import { redirect } from "next/navigation";
 
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
 
-import { unstable_ViewTransition as ViewTransition } from "react";
+import { getCachedMeals } from "@/data-layer/meal.data-layer";
 
 export const maxDuration = 60;
 
@@ -18,14 +17,7 @@ async function Dashboard() {
 		return redirect("/");
 	}
 
-	const userMeals = await prisma.meal.findMany({
-		where: {
-			userId: session.user.id,
-		},
-		orderBy: {
-			createdAt: "desc",
-		},
-	});
+	const userMeals = await getCachedMeals(session.user.id);
 
 	return (
 		<div className="flex flex-col gap-4">

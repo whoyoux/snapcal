@@ -1,8 +1,10 @@
 "use server";
 
+import { MEALS_CACHE_TAG } from "@/data-layer/meal.data-layer";
 import { prisma } from "@/lib/prisma";
 import { authActionClient } from "@/lib/safe-action";
 import { DeleteMealSchema } from "@/schemas/meal-schema";
+import { revalidateTag } from "next/cache";
 
 export const deleteMealAction = authActionClient
 	.schema(DeleteMealSchema)
@@ -21,6 +23,8 @@ export const deleteMealAction = authActionClient
 					message: "Could not remove meal. Please try again later.",
 				};
 			}
+
+			revalidateTag(`${MEALS_CACHE_TAG}-${session.user.id}`);
 
 			return {
 				success: true,

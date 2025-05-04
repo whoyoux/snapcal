@@ -1,11 +1,13 @@
 "use server";
 
+import { MEALS_CACHE_TAG } from "@/data-layer/meal.data-layer";
 import { calculateFromImageAi } from "@/lib/ai";
 import { prisma } from "@/lib/prisma";
 import { authActionClient } from "@/lib/safe-action";
 import { compressFile } from "@/lib/sharp";
 import { uploadFile } from "@/lib/utapi";
 import { UploadImageFormSchema } from "@/schemas/upload-image-schema";
+import { revalidateTag } from "next/cache";
 
 export const calculateCalories = authActionClient
 	.schema(UploadImageFormSchema)
@@ -52,6 +54,8 @@ export const calculateCalories = authActionClient
 				message: "An error has occured. Please try again later!",
 			};
 		}
+
+		revalidateTag(`${MEALS_CACHE_TAG}-${session.user.id}`);
 
 		return {
 			success: true,
