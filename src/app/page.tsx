@@ -17,7 +17,7 @@ export default function Home() {
 						src={heroImage}
 						alt="SnapCal in action"
 						fill
-						className="object-cover "
+						className="object-cover"
 						placeholder="blur"
 						priority
 					/>
@@ -27,8 +27,8 @@ export default function Home() {
 						Counting calories has never been easier
 					</h1>
 					<p className="text-xl text-muted-foreground">
-						Take a photo of your meal, and we'll handle the rest. Track your
-						diet in a simple and fast way.
+						Take a photo of your meal, and we&apos;ll handle the rest. Track
+						your diet in a simple and fast way.
 					</p>
 					<div className="flex gap-4 justify-center pt-4">
 						<Link
