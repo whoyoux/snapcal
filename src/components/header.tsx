@@ -3,6 +3,7 @@ import LoginButton from "@/components/ui/login-button";
 import AuthUser from "./ui/auth-user";
 import getSession from "@/lib/auth-server";
 import { Suspense } from "react";
+import LogoutButton from "./ui/logout-button";
 
 async function HeaderContent() {
 	const session = await getSession();
@@ -14,7 +15,9 @@ async function HeaderContent() {
 
 			<Suspense fallback={<LoginButton isPending={true} />}>
 				{session ? (
-					<AuthUser user={session.user} />
+					<AuthUser user={session.user}>
+						<LogoutButton />
+					</AuthUser>
 				) : (
 					<LoginButton isPending={false} />
 				)}

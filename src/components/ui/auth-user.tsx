@@ -13,22 +13,12 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { signOut } from "@/lib/auth-client";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
-function AuthUser({ user }: { user: User }) {
-	const router = useRouter();
-	const signOutAndRedirect = async () => {
-		await signOut();
-		router.push("/");
-	};
-
-	useEffect(() => {
-		router.prefetch("/dashboard");
-	}, [router]);
-
+function AuthUser({
+	user,
+	children,
+}: { user: User; children: React.ReactNode }) {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
@@ -68,10 +58,7 @@ function AuthUser({ user }: { user: User }) {
 				{/* <DropdownMenuItem disabled>Support</DropdownMenuItem>
 				<DropdownMenuItem disabled>API</DropdownMenuItem> */}
 				<DropdownMenuSeparator />
-				<DropdownMenuItem onClick={async () => await signOutAndRedirect()}>
-					Log out
-					<DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-				</DropdownMenuItem>
+				{children}
 			</DropdownMenuContent>
 		</DropdownMenu>
 	);
