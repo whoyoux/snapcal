@@ -1,12 +1,12 @@
 import Link from "next/link";
 import LoginButton from "@/components/ui/login-button";
 import AuthUser from "./ui/auth-user";
-import getSession from "@/lib/auth-server";
+import getSession, { getCachedSession } from "@/lib/auth-server";
 import { Suspense } from "react";
 import LogoutButton from "./ui/logout-button";
 
 async function HeaderContent() {
-	const session = await getSession();
+	const session = await getCachedSession();
 	return (
 		<header className="max-w-screen-md mx-auto py-5 border-b flex items-center justify-between">
 			<Link href="/">

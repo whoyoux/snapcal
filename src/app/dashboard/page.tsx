@@ -1,6 +1,6 @@
 //import UploadImageCard from "@/components/upload-image-card";
 import UploadImageDialog from "@/components/upload-image-dialog";
-import getSession from "@/lib/auth-server";
+import { getCachedSession } from "@/lib/auth-server";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
@@ -12,7 +12,7 @@ import { getCachedMeals } from "@/data-layer/meal.data-layer";
 export const maxDuration = 60;
 
 async function Dashboard() {
-	const session = await getSession();
+	const session = await getCachedSession();
 	if (!session) {
 		return redirect("/");
 	}
