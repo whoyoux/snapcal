@@ -40,7 +40,7 @@ function LoadingMealPage() {
 					</div>
 				</div>
 
-				<div>
+				{/* <div>
 					<Skeleton className="h-7 w-32 mb-4" />
 					<div className="space-y-2">
 						<Skeleton className="h-4 w-full" />
@@ -48,7 +48,7 @@ function LoadingMealPage() {
 						<Skeleton className="h-4 w-5/6" />
 						<Skeleton className="h-4 w-2/3" />
 					</div>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);

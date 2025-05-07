@@ -73,18 +73,6 @@ async function MealPage(props: { params: Promise<{ id: string }> }) {
 						<span className="text-sm text-muted-foreground">Fat</span>
 					</div>
 				</div>
-
-				{/* <div>
-					<h3 className="text-xl font-medium mb-4">Ingredients:</h3>
-					<ul className="space-y-2">
-						{meal.ingredients.map((ingredient, index) => (
-							// biome-ignore lint/suspicious/noArrayIndexKey: Lista składników jest statyczna
-							<li key={index} className="text-muted-foreground">
-								{ingredient}
-							</li>
-						))}
-					</ul>
-				</div> */}
 			</div>
 		</div>
 	);
