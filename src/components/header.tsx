@@ -1,24 +1,41 @@
-"use client";
-
 import Link from "next/link";
 import LoginButton from "@/components/ui/login-button";
-import { useSession } from "@/lib/auth-client";
 import AuthUser from "./ui/auth-user";
+import getSession from "@/lib/auth-server";
+import { Suspense } from "react";
 
-function Header() {
-	const { isPending, data: session } = useSession();
+async function HeaderContent() {
+	const session = await getSession();
 	return (
 		<header className="max-w-screen-md mx-auto py-5 border-b flex items-center justify-between">
 			<Link href="/">
 				<h1 className="text-lg font-semibold">SnapCal</h1>
 			</Link>
-			{session ? (
-				<AuthUser user={session.user} />
-			) : (
-				<LoginButton isPending={isPending} />
-			)}
+
+			<Suspense fallback={<LoginButton isPending={true} />}>
+				{session ? (
+					<AuthUser user={session.user} />
+				) : (
+					<LoginButton isPending={false} />
+				)}
+			</Suspense>
 		</header>
 	);
 }
 
-export default Header;
+export default function Header() {
+	return (
+		<Suspense
+			fallback={
+				<header className="max-w-screen-md mx-auto py-5 border-b flex items-center justify-between">
+					<Link href="/">
+						<h1 className="text-lg font-semibold">SnapCal</h1>
+					</Link>
+					<LoginButton isPending={true} />
+				</header>
+			}
+		>
+			<HeaderContent />
+		</Suspense>
+	);
+}

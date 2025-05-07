@@ -1,3 +1,4 @@
+"use client";
 import type { User } from "better-auth";
 
 import { Button } from "@/components/ui/button";
@@ -25,8 +26,8 @@ function AuthUser({ user }: { user: User }) {
 	};
 
 	useEffect(() => {
-		router.prefetch('/dashboard')
-	}, [router])
+		router.prefetch("/dashboard");
+	}, [router]);
 
 	return (
 		<DropdownMenu>
